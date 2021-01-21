@@ -8,7 +8,7 @@ import {interval} from 'rxjs'
 })
 export class AppComponent {
   constructor() {
-    const intervalStream$ = interval(1000) //$ - (не обязательный знак)показывает что здесь содержит стрим от rxjs
+    const intervalStream$ = interval(10000) //$ - (не обязательный знак)показывает что здесь содержит стрим от rxjs
     intervalStream$.subscribe((value => {
       console.log(value)
     }))
