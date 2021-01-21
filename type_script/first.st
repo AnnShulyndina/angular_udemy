@@ -1,45 +1,27 @@
-let str: string = "Hello Typescript"
-let num: number = 42;
-let isActive: boolean = false
-
-let strArray: string[] = ['h', 'e', 'l']
-let numArray: Array<number> = [1, 1, 2, 3]
-console.log(numArray)
-
-function logInfo(name: string, age: number): void {
-    console.log(`Info: ${name}, ${age}`)
+interface UserInterface {
+    name: string
+    age: number
+    logInfo: () => void // - функция которая возвращает пустое значение
+    id?: any
 }
 
-logInfo("Ann", 28)
-
-function calc(a: number, b: number | string): number {
-    if (typeof b === 'string') b = +b
-    return a + b
+interface MyData {
+    nativeTown: string
+    parentsName: string
+    pets?: any
 }
 
-console.log(calc(1, 2)
-
-//class
-
-class Server {
-    static VERSION = '1.0.3'
-    private status: string = 'working'
-    constructor(public name: string, protected ip: number) {
-        this.name = name
-        this.ip = ip
-    }
-
-    turnOn() {
-        this.status = 'working'
-    }
-
-    turnOff() {
-        this.status = 'offline'
-    }
-
-    getStatus(): string {
-        return this.status
+const user: UserInterface = {
+    name: 'Ann',
+    age: 25,
+    logInfo() {
+        console.log(this.name + ' ' + this.age)
     }
 }
 
-const server: Server = new Server('AWS', 1234)
+const AnnData: MyData = {
+    nativeTown: 'Gatchina',
+    parentsName: 'Valeriy and Irina',
+
+}
+
