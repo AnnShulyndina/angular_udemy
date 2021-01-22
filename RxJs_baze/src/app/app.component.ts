@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {Subscription, Observable} from 'rxjs'
-import {error} from "@angular/compiler/src/util";
+import {Subscription, Subject} from 'rxjs'
 
 
 @Component({
@@ -11,33 +10,22 @@ import {error} from "@angular/compiler/src/util";
 export class AppComponent {
 
   sub: Subscription
+  stream$: Subject<number> = new Subject<number>()
+  counter = 0
 
   constructor() {
-    const stream$ = new Observable(observer => {
-
-      setTimeout(() => {
-        observer.next(1)
-      }, 1500)
-
-      setTimeout(() => {
-        observer.complete()
-      }, 2500)
-
-      setTimeout(() => {
-        observer.error('Something went wrong')
-      }, 2600)
-
-    })
-    this.sub = stream$
-      .subscribe(
-        value => console.log('Next:', value),
-        error => console.log('Error:', error),
-        () => console.log('Complete')
-      )
+    this.sub = this.stream$.subscribe((value => {
+      console.log('Sub', value)
+    }))
   }
 
   stop() {
     this.sub.unsubscribe()
+  }
+
+  next() {
+    this.counter++
+    this.stream$.next(this.counter)
   }
 }
 
