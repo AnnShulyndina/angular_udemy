@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {interval, Subscription} from 'rxjs'
-import {map, filter} from "rxjs/operators";
+import {Subscription, Observable} from 'rxjs'
+import {error} from "@angular/compiler/src/util";
+
 
 @Component({
   selector: 'app-root',
@@ -12,20 +13,27 @@ export class AppComponent {
   sub: Subscription
 
   constructor() {
+    const stream$ = new Observable(observer => {
 
-    const intervalStream$ = interval(1000) //$ - (не обязательный знак) показывает что здесь содержит стрим от rxjs
-    this.sub = intervalStream$
+      setTimeout(() => {
+        observer.next(1)
+      }, 1500)
 
-      .pipe(
+      setTimeout(() => {
+        observer.complete()
+      }, 2500)
 
-        filter(value => value % 2 === 0),
-        map((value)=>`Mapped value ${value}`)
+      setTimeout(() => {
+        observer.error('Something went wrong')
+      }, 2600)
+
+    })
+    this.sub = stream$
+      .subscribe(
+        value => console.log('Next:', value),
+        error => console.log('Error:', error),
+        () => console.log('Complete')
       )
-
-      .subscribe((value) => {
-        console.log(value)
-      }
-    )
   }
 
   stop() {
