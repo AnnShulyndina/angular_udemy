@@ -7,7 +7,15 @@
 
 <!--<p><strong>{{'Hello' + 'World'}}</strong></p>-->
 
-<img src="{{img}}" alt="">
+
+<button (click)="onClick()">Click!</button>
+
+<input type="text"
+       (keyup.enter)="onInput($event)"
+       (blur)="onBlur(myInput.value)"
+       #myInput>
+
+<P><strong>{{inputValue}}</strong></P>
 
 <hr>
 
