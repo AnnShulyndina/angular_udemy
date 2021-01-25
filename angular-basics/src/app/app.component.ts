@@ -6,11 +6,13 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = "initial"
+  title1="IamRedLemon"
 
   onInput(event: any) {
-    this.title = event.target.value
+    this.title1 = event.target.value
   }
+
+  title = "initial"
 }
 
 
