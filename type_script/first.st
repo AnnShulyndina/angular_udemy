@@ -8,10 +8,10 @@ interface User {
 }
 
 const users: Array<User> = [
-    {id: 1, name: 'V', age: 2}
+    {id: 1, name: 'V', age: 2},
     {id: 2, name: 'V', age: 23}
 ]
 const users2: User[] = [
-    {id: 1, name: 'V', age: 2}
+    {id: 1, name: 'V', age: 2},
     {id: 2, name: 'V', age: 23}
 ]
