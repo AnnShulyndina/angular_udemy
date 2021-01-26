@@ -1,11 +1,7 @@
 <h1>Hello Angular world</h1>
-<button (click)="toggle = !toggle">Toggle</button>
-<button (click)="toggle = 111">set111</button>
-<div [ngSwitch]="toggle">
-  <p *ngSwitchCase="true" class="red">Lorem ipsum.</p>
-  <p *ngSwitchCase="false" class="blue">Lorem ipsum dolor.</p>
-  <p *ngSwitchDefault>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, nisi!</p>
-</div>
+<P>
+  {{now | date: 'long' | uppercase }}
+</P>
 
 
 
