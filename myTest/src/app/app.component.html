@@ -1,1 +1,11 @@
-<h1> App works! </h1>
+<div class="content">
+  <h1>Hey</h1>
+  <app-post-form
+    (onAdd)="updatePosts($event)"
+  ></app-post-form>
+
+<app-post
+  *ngFor="let p of postLists"
+  [post]="p">
+</app-post>
+</div>
