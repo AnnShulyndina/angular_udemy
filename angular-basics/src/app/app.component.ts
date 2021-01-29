@@ -24,6 +24,10 @@ export class AppComponent {
     this.postList.unshift(post)
 // console.log('post', post)
   }
+  postDestroy(id: number){
+console.log('Id to remove', id)
+    this.postList = this.postList.filter(p=>p.id !==id)
+  }
 }
 
 
