@@ -1,21 +1,18 @@
-import {Directive, ElementRef, HostBinding, HostListener, Input, Renderer2} from "@angular/core";
+import {Directive, ElementRef, HostBinding, HostListener, Input, Renderer2} from '@angular/core'
 
 @Directive({
-  selector: '[appStyle]',
-
+  selector: '[appStyle]'
 })
 export class StyleDirective {
-
   @Input('appStyle') color: string = 'blue'
-
-  @Input() dStyles: { border?: string, fontWeight?: string, borderRadius?: string }
+  @Input() dStyles: {border?: string, fontWeight?: string, borderRadius?: string}
 
   @HostBinding('style.color') elColor = null
 
   constructor(private el: ElementRef, private r: Renderer2) {
   }
 
-  @HostListener('click', ['$event.target']) onClick(event: Event) {
+  @HostListener('click', ['$event.target']) onClick(event: Element) {
     console.log(event)
   }
 
