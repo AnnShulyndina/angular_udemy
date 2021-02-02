@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
+
+export interface Post {
+  title: string
+  text: string
+}
 
 @Component({
   selector: 'app-root',
@@ -6,22 +12,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  e: number = Math.E
 
-  str = 'hello world'
+  search = ''
+  searchField = 'title'
 
-  date: Date = new Date()
-
-  float: number = 0.42
-
-  obj = {
-    a:1,
-    b:{
-      c:2,
-      d:{
-        e: 3,
-        f: 4
-      }
-    }
-  }
+  posts: Post[] = [
+    {title: 'Beer', text: 'the best beer in the world'},
+    {title: 'Bread', text: ' the best bread in the world'},
+    {title: 'English', text: 'the best language in the world'}
+  ]
 }
