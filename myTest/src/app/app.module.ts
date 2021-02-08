@@ -3,15 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
-import { PostComponent } from './post/post.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { PostComponent } from './post/post.component';
+
+
+import { FilterPipe } from './pipes/filter.pipe';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostComponent,
-    PostFormComponent
+    FilterPipe,
+    PostFormComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

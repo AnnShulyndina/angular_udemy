@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 
 export interface Post {
-  title: string;
-  text: string;
+  title: string
+  text: string
   id?: number
 }
 
@@ -13,14 +13,19 @@ export interface Post {
 })
 export class AppComponent {
 
-postLists: Post [] = [
-  {title: 'Fresh News', text: 'Everyone knows who did it', id: 1},
-  {title: 'You asking why', text: 'Because your game is dangerous', id: 2}
-]
+  search = ''
 
-  updatePosts(post: Post){
-  this.postLists.unshift(post)
-  // console.log('Post', post)
+  posts: Post[] = [
+    {title: 'Hello, I am a title', text: 'Hello,  I am a text', id: 0},
+    {title: 'This is HOT news of the day', text: 'The sun is shining red color', id: 1},
+    {title: 'I love eat cookies', text: 'why cookies so fat?', id: 2}
+  ]
+
+  updatePosts(post: Post) {
+    this.posts.unshift(post)
   }
 
+  removePosts(id: number) {
+    this.posts = this.posts.filter(p => p.id !== id)
+  }
 }
