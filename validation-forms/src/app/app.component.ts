@@ -8,9 +8,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class AppComponent implements OnInit {
 
-  form:FormGroup
+  form: FormGroup
 
-  ngOnInit(){
+  ngOnInit() {
     this.form = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(null)
@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
   }
 
   submit() {
-    console.log('submit', this.form)
+    console.log('form', this.form)
+    const formData = {...this.form.value}
+    console.log('formData', formData)
   }
 }
