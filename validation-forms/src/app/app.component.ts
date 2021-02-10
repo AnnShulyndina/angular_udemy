@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
     if(this.form.valid){
       const formData = {...this.form.value}
       console.log('form data:', formData)
+      this.form.reset()
     }
   }
 
