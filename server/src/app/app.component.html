@@ -7,17 +7,23 @@
     <input type="text" placeholder="Название" [(ngModel)]="todoTitle">
   </div>
   <button class="btn" (click)="addTodo()">Add</button>
-  <button class="btn">Download</button>
+  <button class="btn" (click)="fetchTodos()">Download</button>
 </div>
 
 <hr>
 
-<div class="card" *ngFor="let todo of todos">
-  <p>
-    <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
-    <span>
+<div *ngIf="!loading; else loadingBlock(loading)">
+  <div class="card" *ngFor="let todo of todos">
+    <p>
+      <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
+      <span>
       <button class="btn btn-danger">Delete</button>
       <button class="btn btn" [disabled]="todo.completed">Complete</button>
     </span>
-  </p>
+    </p>
+  </div>
+
+
+
 </div>
+
