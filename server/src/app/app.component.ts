@@ -39,11 +39,10 @@ export class AppComponent implements OnInit {
 
   fetchTodos() {
     this.loading = true
-    this.todosService.fetchTodos()
-      .subscribe(todos => {
-        this.todos = todos
-        this.loading = false
-      })
+    this.todosService.fetchTodos().subscribe(todos => {
+      this.todos = todos
+      this.loading = false
+    })
   }
 
   loadingBlock(loading) {
@@ -51,9 +50,14 @@ export class AppComponent implements OnInit {
   }
 
   removeTodo(id: number) {
-    this.todosService.removeTodo(id)
-      .subscribe(resp => {
-        this.todos = this.todos.filter(t => t.id != id)
-      })
+    this.todosService.removeTodo(id).subscribe(resp => {
+      this.todos = this.todos.filter(t => t.id != id)
+    })
+  }
+
+  completeTodo(id: number) {
+    this.todosService.completeTodo(id).subscribe(todo => {
+      this.todos.find(t => t.id === todo.id).completed = true
+    })
   }
 }
