@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable, observable} from "rxjs";
-import {delay} from "rxjs/operators";
+import {Observable, throwError,} from "rxjs";
+import {catchError, delay} from "rxjs/operators";
 
 export interface Todo {
   completed: boolean
@@ -11,24 +11,30 @@ export interface Todo {
 
 @Injectable({providedIn: 'root'})
 export class TodosService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   addTodo(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>('https://jsonplaceholder.typicode.com/todos', todo)
+    return this.http.post<Todo>('https://jsonplaceholder.typicode.com/todos?', todo)
   }
 
   fetchTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-      .pipe(delay(500))
+    return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todosf?')
+      .pipe(delay(500),
+        catchError(error => {
+          console.log('error', error.message)
+          return throwError(error)
+        })
+      )
   }
 
   removeTodo(id: number): Observable<void> {
     return this.http.delete<void>(`https://jsonplaceholder.typicode.com/todos/${id}`)
   }
 
-  completeTodo(id:number):Observable<Todo> {
+  completeTodo(id: number): Observable<Todo> {
     return this.http.put<Todo>(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-      completed:true
+      completed: true
     })
   }
 }

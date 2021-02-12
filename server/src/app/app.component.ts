@@ -5,6 +5,7 @@ export interface Todo {
   completed: boolean
   title: string
   id?: number
+
 }
 
 @Component({
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
   todos: Todo[] = []
   todoTitle = ''
   loading = false
+  error = ''
 
   constructor(private todosService: TodosService) {
   }
@@ -42,6 +44,8 @@ export class AppComponent implements OnInit {
     this.todosService.fetchTodos().subscribe(todos => {
       this.todos = todos
       this.loading = false
+    }, error => {
+      this.error = error.massage
     })
   }
 
