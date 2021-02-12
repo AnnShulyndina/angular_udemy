@@ -33,7 +33,7 @@ export class TodosService {
       observe: 'response'
     })
       .pipe(
-        map(response =>{
+        map(response => {
           return response.body
         }),
         delay(500),
@@ -46,14 +46,14 @@ export class TodosService {
 
   removeTodo(id: number): Observable<any> {
     return this.http.delete<void>(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-      observe:'events'
+      observe: 'events'
     }).pipe(
       tap(event => {
-        if (event.type === HttpEventType.Sent){
+        if (event.type === HttpEventType.Sent) {
           console.log('Sent', event)
         }
 
-        if (event.type === HttpEventType.Response ){
+        if (event.type === HttpEventType.Response) {
           console.log('Response', event)
         }
       })
