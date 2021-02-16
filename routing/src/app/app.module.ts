@@ -21,6 +21,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     PostsComponent,
     AboutExtraComponent,
     ErrorPageComponent,
+
   ],
   imports: [
     BrowserModule,
