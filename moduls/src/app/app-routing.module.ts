@@ -7,7 +7,11 @@ import {HomePageComponent} from './home-page/home-page.component'
   imports: [RouterModule.forRoot([
 
     {path: '', component: HomePageComponent, pathMatch: 'full'},
-    {path: '', loadChildren: './about-page/about-page.module#AboutPageModule'}
+    // {path: '', loadChildren: './about-page/about-page.module#AboutPageModule'}
+    {path: '', loadChildren:()=> import(
+      './about-page/about-page.module').then(
+        m=> m.AboutPageModule
+      )}
   ])],
   exports: [RouterModule]
 })
