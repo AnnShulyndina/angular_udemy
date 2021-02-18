@@ -1,6 +1,6 @@
 import {PostsComponent} from "./posts.component";
 import {PostsService} from "./posts.service";
-import {EMPTY, of} from "rxjs";
+import {EMPTY, of, throwError} from "rxjs";
 
 describe('PostComponent', () => {
   let component: PostsComponent
@@ -11,19 +11,19 @@ describe('PostComponent', () => {
     component = new PostsComponent(service)
   })
 
-  it('should call fetch when ngOnInit', () => {
-    const spy = spyOn(service, 'fetch').and.callFake(() => {
-      return EMPTY
-    })
-    component.ngOnInit()
+  it('', () => {
+    const post = {title: 'test'}
+    const spy = spyOn(service, 'create').and.returnValue(of(post))
+    component.add('test')
     expect(spy).toHaveBeenCalled()
+    expect(component.posts.includes(post)).toBeTruthy()
   })
 
-it ('should call fetch when ngOnInit', () => {
-    const posts = [1, 2, 3, 4]
-      spyOn(service, 'fetch').and.returnValue(of(posts))
-    component.ngOnInit()
-    expect(component.posts.length).toBe(posts.length)
+  it('should add new post', () => {
+    const error = 'error message'
+    spyOn(service, 'create').and.returnValue(throwError(error))
+    component.add('post title')
+    expect(component.message).toBe(error)
   })
 
 })
