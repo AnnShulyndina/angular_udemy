@@ -1,39 +1,32 @@
 import {PostsComponent} from "./posts.component";
 import {PostsService} from "./posts.service";
-import {EMPTY, of, throwError} from "rxjs";
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {HttpClientModule} from "@angular/common/http";
+import {of} from "rxjs";
 
-describe('PostComponent', () => {
+describe('PostsComponent', () => {
+  let fixture: ComponentFixture<PostsComponent>
   let component: PostsComponent
   let service: PostsService
 
+
   beforeEach(() => {
-    service = new PostsService(null)
-    component = new PostsComponent(service)
+    TestBed.configureTestingModule({
+      declarations: [PostsComponent],
+      providers: [PostsService],
+      imports: [HttpClientModule]
+    })
+    fixture = TestBed.createComponent(PostsComponent)
+    component = fixture.componentInstance
+    // service = fixture.debugElement.injector.get(PostsService)
+    service = TestBed.inject(PostsService)
   })
 
-  it('', () => {
-    const post = {title: 'test'}
-    const spy = spyOn(service, 'create').and.returnValue(of(post))
-    component.add('test')
-    expect(spy).toHaveBeenCalled()
-    expect(component.posts.includes(post)).toBeTruthy()
+  it('should fetch posts on ngOnInit', () => {
+    const posts = [1, 2, 3]
+
+    spyOn(service, 'fetch').and.returnValue(of(posts))
+    fixture.detectChanges()
+    expect(component.posts).toEqual(posts)
   })
-
-  it('should add new post', () => {
-    const error = 'error message'
-    spyOn(service, 'create').and.returnValue(throwError(error))
-    component.add('post title')
-    expect(component.message).toBe(error)
-  })
-
-  it('should remove post if user confirm', ()=>{
-    const spy = spyOn(service, 'remove').and.returnValue(EMPTY)
-    spyOn(window, 'confirm').and.returnValue(true)
-    component.delete(10)
-    expect(spy).toHaveBeenCalledWith(10)
-
-  })
-
 })
-
-
