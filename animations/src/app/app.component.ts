@@ -25,7 +25,7 @@ import {animate, group, keyframes, query, state, style, transition, trigger} fro
         group([
           query('h4', animate(1500, style({
             fontSize: '.5rem',
-            color:'red'
+            color: 'red'
           }))),
           style({background: 'green'}),
           animate(1000, style({
@@ -70,5 +70,13 @@ export class AppComponent {
 
   animate() {
     this.boxState = this.boxState === 'end' ? 'start' : 'end'
+  }
+
+  animationStarted(event: AnimationEvent) {
+    console.log('animationStarted', event)
+  }
+
+  animationDone(event: AnimationEvent) {
+    console.log('animationDone', event)
   }
 }
